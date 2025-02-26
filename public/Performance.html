@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Performance</title>
+  </head>
+  <body>
+    <button onclick="Add()">Add</button>
+    <button onclick="Remove()">Remove</button>
+    <button onclick="RemoveAll()">Remove All</button>
+    <button onclick="Test()">Test</button>
+    <div id="d1">
+      <div id="d2"></div>
+    </div>
+    <script>
+      const place = document.getElementById("d2");
+      function Add() {
+        for (let i = 0; i < 5; i++) {
+          const para = document.createElement("p");
+          // const node=document.createTextNode(""+Math.round(Math.random()*5))
+          const node = document.createTextNode(i + " " + Math.random() * 10);
+          para.appendChild(node);
+          place.appendChild(para);
+        }
+      }
+      function Remove() {
+        const para = document.getElementsByTagName("p")[0];
+        if (para) {
+          place.removeChild(para);
+        }
+      }
+
+      function RemoveAll() {
+        let count = document.getElementsByTagName("p").length;
+        while (count > 0) {
+          const para = document.getElementsByTagName("p")[0];
+          place.removeChild(para);
+          count--;
+        }
+      }
+      function Test() {
+        for (let i = 0; i < 1000000; i++) {
+          Add();
+          RemoveAll();
+        }
+        Add();
+      }
+    </script>
+  </body>
+</html>
